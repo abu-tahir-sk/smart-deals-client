@@ -1,15 +1,16 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 
 const Navbar = () => {
 
-      const  links = [
-            <li><NavLink to="/">Home</NavLink></li>,
+      const  links = <>
+            <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/all-products">All Products</NavLink></li>
 
-      ];
+      </>;
       return (
-           <div className="navbar bg-base-100 shadow-sm">
+       <div className=" bg-base-100 shadow-sm">
+            <div className="navbar w-11/12 mx-auto">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -21,17 +22,19 @@ const Navbar = () => {
         {links}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">Smart <span className="text-purple-700">Deals</span></a>
+    <h5 className="text-2xl font-semibold ">Smart <span className="bg-linear-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent font-semibold">Deals</span></h5>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
       {links}
     </ul>
   </div>
-  <div className="navbar-end">
-    <a className="btn">Button</a>
+  <div className="navbar-end gap-2">
+    <Link to="login" className="btn border-2 border-[#8639f2] bg-linear-to-r from-[#632EE3] to-[#8639f2] bg-clip-text text-transparent">Login </Link>
+    <Link to="register" className="btn bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white">Register</Link>
   </div>
 </div>
+       </div>
       );
 };
 
