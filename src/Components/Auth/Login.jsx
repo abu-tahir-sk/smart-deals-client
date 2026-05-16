@@ -1,17 +1,54 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { use, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 const Login = () => {
-        const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate()
+
+  const { userSignIn, signInGoogle } = use(AuthContext);
   const handleRegister = (e) => {
     e.preventDefault();
 
     const form = e.target;
 
-    
     const email = form.email.value;
     const password = form.password.value;
     console.log(name, email, password);
+
+    userSignIn(email, password)
+      .then((result) => {
+        console.log(result.user);
+        navigate("/")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleSignInGoogle = () => {
+    signInGoogle()
+      .then((result) => {
+        console.log(result);
+        const newUser = {
+          name: result.user.displayName,
+          email: result.user.email,
+          image : result.user.photoURL
+        }
+        fetch("http://localhost:3000/users",{
+          method: "POST",
+          headers: {
+            "content-type":"application/json"
+          },
+          body: JSON.stringify(newUser)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          console.log(data)
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="min-h-screen flex justify-center items-center">
@@ -29,7 +66,6 @@ const Login = () => {
           </p>
 
           <form onSubmit={handleRegister}>
-          
             <fieldset className="fieldset">
               <label className="fieldset-legend">Email</label>
               <input
@@ -39,7 +75,7 @@ const Login = () => {
                 placeholder="Enter your email"
               />
             </fieldset>
-           
+
             <fieldset className="fieldset">
               <label className="fieldset-legend">Password</label>
               <input
@@ -64,7 +100,10 @@ const Login = () => {
           <div className="divider">OR</div>
 
           {/* Google */}
-          <button className="btn bg-white text-black border-[#e5e5e5] w-full">
+          <button
+            onClick={handleSignInGoogle}
+            className="btn bg-white text-black border-[#e5e5e5] w-full"
+          >
             <svg
               aria-label="Google logo"
               width="16"
