@@ -4,7 +4,7 @@ import { AuthContext } from "../../Contexts/AuthContext";
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { userSignIn, signInGoogle } = use(AuthContext);
   const handleRegister = (e) => {
@@ -19,7 +19,7 @@ const Login = () => {
     userSignIn(email, password)
       .then((result) => {
         console.log(result.user);
-        navigate("/")
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
@@ -32,19 +32,19 @@ const Login = () => {
         const newUser = {
           name: result.user.displayName,
           email: result.user.email,
-          image : result.user.photoURL
-        }
-        fetch("http://localhost:3000/users",{
+          image: result.user.photoURL,
+        };
+        fetch("http://localhost:3000/users", {
           method: "POST",
           headers: {
-            "content-type":"application/json"
+            "content-type": "application/json",
           },
-          body: JSON.stringify(newUser)
+          body: JSON.stringify(newUser),
         })
-        .then(res=>res.json())
-        .then(data=>{
-          console.log(data)
-        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
       })
       .catch((error) => {
         console.log(error);
