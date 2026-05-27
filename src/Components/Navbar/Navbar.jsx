@@ -62,7 +62,7 @@ const Navbar = () => {
           {user ? (
             <button
               onClick={handleSignOut}
-              className="btn border-2 border-[#8639f2] bg-linear-to-r from-[#632EE3] to-[#8639f2] bg-clip-text text-transparent"
+              className="btn border-2 border-[#8639f2] bg-linear-to-r from-[#632EE3] to-[#8639f2] bg-clip-text text-transparent "
             >
               Sign Out
             </button>
@@ -76,7 +76,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to="register"
-                className="btn bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white"
+                className="btn btn-primary-gradient  text-white"
               >
                 Register
               </Link>

@@ -92,7 +92,7 @@ const Login = () => {
               </label>
             </fieldset>
             {/* login button */}
-            <button className="text-white bg-linear-to-r from-[#632EE3] to-[#8639f2] w-full rounded-md py-2 my-3">
+            <button className="text-white btn-primary-gradient w-full rounded-md py-2 my-3">
               Login
             </button>
           </form>
